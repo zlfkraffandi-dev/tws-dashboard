@@ -27,7 +27,18 @@ export default function ActivePositions() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {activeTrades.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 p-6 text-center backdrop-blur-md">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 mb-2.5 border border-emerald-500/20">
+            <CheckCircle2 className="h-5 w-5" />
+          </div>
+          <h3 className="text-sm font-bold text-slate-200">Semua Posisi Telah Selesai (100% Kas Bersih)</h3>
+          <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+            NEAR dan DOT sukses mencapai Target Penuh (+4.17R Net). Portofolio saat ini nol risiko terbuka (Zero Risk Exposure). Menunggu struktur lelang berikutnya.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {activeTrades.map((trade, idx) => {
           const isTp1Hit = trade.status === "TP1_HIT";
           const pnlPct = ((trade.currentPrice - trade.entryPrice) / trade.entryPrice) * 100;
@@ -137,6 +148,7 @@ export default function ActivePositions() {
           );
         })}
       </div>
+      )}
     </div>
   );
 }

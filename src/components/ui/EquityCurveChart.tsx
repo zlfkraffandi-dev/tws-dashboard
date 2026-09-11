@@ -9,8 +9,8 @@ export default function EquityCurveChart() {
     { label: "Mulai (6 Sep)", r: 0, desc: "Modal Awal" },
     { label: "UNI (8 Sep)", r: -1.0, desc: "Cutloss di SL $6.60 (-1.0R)" },
     { label: "DOT (9 Sep)", r: 2.71, desc: "Full Win TP2 (+3.71R Net)" },
-    { label: "NEAR (10 Sep)", r: 4.27, desc: "TP1 Hit $2.484 (+1.56R)" },
-    { label: "TAO (11 Sep)", r: 3.27, desc: "Cutloss di SL $237.50 (-1.0R)" },
+    { label: "TAO (11 Sep Pagi)", r: 1.71, desc: "Cutloss di SL $237.50 (-1.0R)" },
+    { label: "NEAR (11 Sep Malam)", r: 4.17, desc: "TP1 & TP2 Hit Sempurna $2.72 (+2.46R Net)" },
   ];
 
   const minR = -1.5;

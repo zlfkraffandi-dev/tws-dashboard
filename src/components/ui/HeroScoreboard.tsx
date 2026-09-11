@@ -22,7 +22,7 @@ export default function HeroScoreboard() {
     {
       title: "Directional Win Rate",
       value: `${stats.winRatePct.toFixed(1)}%`,
-      sub: "2 Menang (DOT, NEAR TP1) • 2 Cut SL (UNI, TAO)",
+      sub: "2 Menang Penuh (DOT, NEAR) • 2 Cut SL (UNI, TAO)",
       badge: "Realistis & Jujur",
       badgeColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
       icon: Target,

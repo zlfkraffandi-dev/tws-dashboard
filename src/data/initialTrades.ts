@@ -1,12 +1,12 @@
 import { Trade, MacroOverview, PortfolioStats } from "@/types/trade";
 
 export const initialMacro: MacroOverview = {
-  regime: "YELLOW",
-  btcPrice: 76820,
-  btcChange24h: -1.79,
-  totalMarketCap: "$2.64T",
-  notes: "Rezim Makro: DEFENSIVE / PULLBACK. BTC breakdown dari $78.5k menuju lantai demand $76.3k. Altcoins merah terkoreksi (-4% s/d -14%). Mode simpan kas aktif.",
-  lastUpdated: "11 September 2026, 10:15 WIB"
+  regime: "GREEN",
+  btcPrice: 77705,
+  btcChange24h: 1.17,
+  totalMarketCap: "$2.71T",
+  notes: "Rezim Makro: VOLATILITY SPIKE / SWEEP. BTC menyapu $75.9k lalu meledak ke $79.9k sebelum tertahan di $77.7k. NEAR sukses tembus TP2 $2.72 (+2.46R Net). Portofolio 100% kas bersih.",
+  lastUpdated: "11 September 2026, 23:36 WIB"
 };
 
 export const initialTrades: Trade[] = [
@@ -16,7 +16,7 @@ export const initialTrades: Trade[] = [
     side: "LONG",
     callDate: "8 Sep 2026",
     entryPrice: 1.030,
-    currentPrice: 1.115,
+    currentPrice: 1.063,
     stopLoss: 0.968,
     tp1: 1.145,
     tp2: 1.260,
@@ -40,22 +40,22 @@ export const initialTrades: Trade[] = [
     side: "LONG",
     callDate: "7 Sep 2026",
     entryPrice: 2.278,
-    currentPrice: 2.392,
-    stopLoss: 2.278, // Moved to Breakeven
+    currentPrice: 2.574,
+    stopLoss: 2.278,
     tp1: 2.484,
     tp2: 2.756,
-    highReached: 2.650,
-    status: "TP1_HIT",
+    highReached: 2.726,
+    status: "CLOSED_WIN",
     riskPct: 5.79,
-    realizedR: 1.56,
-    floatingR: 0.88,
-    totalR: 2.44,
+    realizedR: 2.46,
+    floatingR: 0,
+    totalR: 2.46,
     amtSetupType: "Breakout Retest Acceptance + Equal Lows (EQL) Sweep",
     autopsy: {
-      summary: "TP1 Hit & Free Trade Running Menuju Final Target",
-      whatHappened: "Limit order terjemput presisi di jarum $2.277 (di bawah EQL). Semalam melonjak menyapu Weak High hingga $2.650 (+16.3%). TP1 tercapai (+1.56R realized), 50% profit terkunci di bank, dan SL resmi dikunci di Breakeven ($2.278). Saat BTC dump, NEAR bertahan kuat di $2.39 tanpa risiko modal.",
-      keyLesson: "Level Breakeven menghilangkan risiko psikologis trader 100% saat membiarkan sisa posisi berjalan.",
-      safeguardRule: "Stop Loss di Breakeven $2.278. Sisa posisi ditargetkan keluar mentok di $2.756."
+      summary: "Kemenangan Penuh Sempurna (TP1 & TP2 Hit Maksimal)",
+      whatHappened: "Limit order terjemput di $2.277. Kenaikan melesat ke $2.650 (TP1 Hit, 50% profit aman). Pada malam 11 Sep saat BTC melonjak ke $79.9k, NEAR melesat menembus target akhir di $2.726 (+19.4%). Seluruh sisa muatan ditutup tepat di TP2 sebelum harga kembali terkoreksi ke $2.57.",
+      keyLesson: "Prinsip 'Mentok 3R-4R dan dilarang serakah' terbukti menyelamatkan profit dari round-tripping saat pasar bergejolak tajam.",
+      safeguardRule: "Posisi ditutup 100% penuh di $2.720 (+2.46R Net). Akun kembali 100% kas bersih."
     }
   },
   {
@@ -111,9 +111,9 @@ export const initialTrades: Trade[] = [
 export const initialStats: PortfolioStats = {
   totalTrades: 4,
   winRatePct: 50.0,
-  netRMultiple: 3.27,
+  netRMultiple: 4.17,
   maxDrawdownR: 1.00,
-  activeTradesCount: 1,
-  realizedRTotal: 3.27,
-  floatingRTotal: 0.88
+  activeTradesCount: 0,
+  realizedRTotal: 4.17,
+  floatingRTotal: 0
 };
