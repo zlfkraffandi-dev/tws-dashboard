@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "info": "node scripts/tws-cli.js info",
+    "update": "node scripts/tws-cli.js update",
+    "rekap": "node scripts/tws-cli.js rekap"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
