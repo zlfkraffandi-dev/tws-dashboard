@@ -5,8 +5,8 @@ File ini otomatis diperbarui oleh AI di PC maupun Mac setiap kali ada interaksi 
 ---
 
 ## 📌 Status Terakhir (Last Updated)
-* **Waktu Terakhir**: Selasa, 22 September 2026, Pukul 10:45 WIB
-* **Perangkat Terakhir Aktif**: PC (Windows)
+* **Waktu Terakhir**: Selasa, 22 September 2026, Pukul 11:08 WIB
+* **Perangkat Terakhir Aktif**: Mac
 * **Status Portofolio**: 🛡️ **100% KAS BERSIH (Zero Exposure)**
 * **Akumulasi Realized**: **+3.17R Net Profit** (Win Rate: 40.0% Realized)
 
@@ -26,6 +26,7 @@ File ini otomatis diperbarui oleh AI di PC maupun Mac setiap kali ada interaksi 
 ---
 
 ## 📋 Catatan Diskusi Terakhir & Preferensi User
+* **Mandat Utama Sistem**: Berfungsi aktif sebagai **Radar Informasi, Berita, & Intelijen Segala Hal tentang Crypto** (Breaking News, Makroekonomi, ETF Flows, Narasi/Sektor Panas, Katalis Token, On-Chain Whales, serta filter sinyal institusi vs noise retail).
 * User (Jol / @zlfvkr) ingin percakapan trading di PC dan Mac selalu tersinkronisasi lewat repository private GitHub `zlfkraffandi-dev/tws-dashboard`.
 * Bot Telegram `@tradingjul_bot` (Chat ID: `1947418664`) terhubung aktif.
-* Format pelaporan wajib: `info`, `update`, `rekap`.
+* Format pelaporan wajib: `info`, `update`, `rekap`, dan briefing radar intelijen pasar.
