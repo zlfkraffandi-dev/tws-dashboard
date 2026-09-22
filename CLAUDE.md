@@ -33,3 +33,11 @@ Dokumen ini memuat seluruh memori, aturan, dan histori percakapan agar AI di per
 - `info`: Analisis makro & lelang BTC + 1 setup champion jaring limit (Grade A+). Jika pasar chop/pucuk/weekend: nyatakan `DEFENSIVE / SIMPAN KAS`.
 - `update`: Status posisi running, PnL/R, dan jarak TP/BE. Jika tidak ada trade: laporkan 100% Kas Bersih.
 - `rekap`: Master journal & scoreboard (+3.17R, win rate 40%, autopsi trade).
+
+## 5. Protokol Sinkronisasi Antar-Perangkat (PC & Mac)
+- **File State**: `SESSION_STATE.md` (merekam status percakapan, diskusi terakhir, dan setup aktif).
+- **Perintah Sinkronisasi**: Jalankan `npm run sync` di terminal untuk auto-pull, commit, dan push secara instan.
+- **Kewajiban AI**:
+  - Saat sesi dimulai atau diminta update: AI wajib memastikan state terbaru terbaca dari `SESSION_STATE.md` dan `TRADE_JOURNAL.md`.
+  - Saat ada pembaruan posisi, setup baru, atau keputusan penting: AI wajib memperbarui `SESSION_STATE.md` & `TRADE_JOURNAL.md`, lalu menjalankan `npm run sync` ke GitHub agar perangkat lain langsung sinkron.
+
