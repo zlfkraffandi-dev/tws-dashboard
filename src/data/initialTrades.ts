@@ -2,14 +2,39 @@ import { Trade, MacroOverview, PortfolioStats } from "@/types/trade";
 
 export const initialMacro: MacroOverview = {
   regime: "GREEN",
-  btcPrice: 77705,
-  btcChange24h: 1.17,
-  totalMarketCap: "$2.71T",
-  notes: "Rezim Makro: VOLATILITY SPIKE / SWEEP. BTC menyapu $75.9k lalu meledak ke $79.9k sebelum tertahan di $77.7k. NEAR sukses tembus TP2 $2.72 (+2.46R Net). Portofolio 100% kas bersih.",
-  lastUpdated: "11 September 2026, 23:36 WIB"
+  btcPrice: 77612,
+  btcChange24h: 1.45,
+  totalMarketCap: "$2.73T",
+  notes: "Rezim Makro: EXPANSION / REBOUND. BTC memantul dari $76.3k ke $77.6k di sesi Asia Senin. SUI mengonfirmasi Double VAL Sweep, Limit Order aktif di $0.705 (Target +3.75R).",
+  lastUpdated: "14 September 2026, 12:35 WIB"
 };
 
 export const initialTrades: Trade[] = [
+  {
+    id: "TWS-004",
+    symbol: "SUI/USDT",
+    side: "LONG",
+    callDate: "14 Sep 2026",
+    entryPrice: 0.705,
+    currentPrice: 0.718,
+    stopLoss: 0.685,
+    tp1: 0.742,
+    tp2: 0.780,
+    highReached: 0.747,
+    lowReached: 0.671,
+    status: "STOP_LOSS",
+    riskPct: 2.83,
+    realizedR: -1.00,
+    floatingR: 0,
+    totalR: -1.00,
+    amtSetupType: "Double VAL Sweep + Range Low Reclaim (POC Retest)",
+    autopsy: {
+      summary: "Hit Stop Loss di $0.685 (Penyelamat Modal Saat Dump $0.671)",
+      whatHappened: "Pada malam 15 Sep, penarikan likuiditas pajak AS (Tax Deadline) memicu volume jual masif 22M SUI yang membanting harga menembus limit $0.705 hingga low $0.6712. Stop loss di $0.6850 mengeksekusi cutloss otomatis di -1.00R.",
+      keyLesson: "Sistem Stop Loss adalah polis asuransi mutlak: membatasi kerugian di -1.00R menjaga akun tetap surplus +3.17R.",
+      safeguardRule: "Posisi ditutup disiplin di $0.685 (-1.00R). Akun kembali 100% kas bersih."
+    }
+  },
   {
     id: "TWS-002",
     symbol: "DOT/USDT",
@@ -109,11 +134,11 @@ export const initialTrades: Trade[] = [
 ];
 
 export const initialStats: PortfolioStats = {
-  totalTrades: 4,
-  winRatePct: 50.0,
-  netRMultiple: 4.17,
+  totalTrades: 5,
+  winRatePct: 40.0,
+  netRMultiple: 3.17,
   maxDrawdownR: 1.00,
   activeTradesCount: 0,
-  realizedRTotal: 4.17,
+  realizedRTotal: 3.17,
   floatingRTotal: 0
 };

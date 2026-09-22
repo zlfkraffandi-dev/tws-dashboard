@@ -46,7 +46,7 @@ export default function Header() {
           <div className="flex items-center gap-2 pl-2">
             <span className="text-slate-400 font-medium">BTC:</span>
             <span className="font-mono font-bold text-slate-200">
-              ${macro.btcPrice.toLocaleString()}
+              ${macro.btcPrice.toLocaleString("en-US")}
             </span>
             <span
               className={`font-mono text-[11px] font-semibold ${

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const ids = "bitcoin,near,bittensor,polkadot,uniswap";
+    const ids = "bitcoin,near,bittensor,polkadot,uniswap,sui";
     const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
 
     const controller = new AbortController();
@@ -24,11 +24,12 @@ export async function GET() {
       success: true,
       timestamp: new Date().toISOString(),
       prices: {
-        bitcoin: { price: data.bitcoin?.usd || 78329, change24h: data.bitcoin?.usd_24h_change || -0.53 },
-        near: { price: data.near?.usd || 2.511, change24h: data.near?.usd_24h_change || 8.21 },
-        bittensor: { price: data.bittensor?.usd || 253.86, change24h: data.bittensor?.usd_24h_change || -0.99 },
-        polkadot: { price: data.polkadot?.usd || 1.11, change24h: data.polkadot?.usd_24h_change || -7.49 },
-        uniswap: { price: data.uniswap?.usd || 6.02, change24h: data.uniswap?.usd_24h_change || -2.16 }
+        bitcoin: { price: data.bitcoin?.usd || 77600, change24h: data.bitcoin?.usd_24h_change || 0.1 },
+        sui: { price: data.sui?.usd || 0.714, change24h: data.sui?.usd_24h_change || -0.6 },
+        near: { price: data.near?.usd || 2.42, change24h: data.near?.usd_24h_change || 4.2 },
+        bittensor: { price: data.bittensor?.usd || 236.8, change24h: data.bittensor?.usd_24h_change || -2.4 },
+        polkadot: { price: data.polkadot?.usd || 1.05, change24h: data.polkadot?.usd_24h_change || -4.9 },
+        uniswap: { price: data.uniswap?.usd || 6.08, change24h: data.uniswap?.usd_24h_change || 0.2 }
       }
     });
   } catch (error: any) {
