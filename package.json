@@ -10,7 +10,8 @@
     "info": "node scripts/tws-cli.js info",
     "update": "node scripts/tws-cli.js update",
     "rekap": "node scripts/tws-cli.js rekap",
-    "sync": "node scripts/sync.js"
+    "sync": "node scripts/sync.js",
+    "auto-sync": "node scripts/auto-sync.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
