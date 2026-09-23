@@ -1,0 +1,15 @@
+name: TWS 24/7 Cloud Price Watcher
+
+on:
+  schedule:
+    # Run every 5 minutes 24/7 in the cloud
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-price:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping TWS Cloud Price Watcher
+        run: |
+          curl -s https://tws-dashboard-zeta.vercel.app/api/cron/check-price
