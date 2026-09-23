@@ -2,14 +2,37 @@ import { Trade, MacroOverview, PortfolioStats } from "@/types/trade";
 
 export const initialMacro: MacroOverview = {
   regime: "GREEN",
-  btcPrice: 77612,
-  btcChange24h: 1.45,
-  totalMarketCap: "$2.73T",
-  notes: "Rezim Makro: EXPANSION / REBOUND. BTC memantul dari $76.3k ke $77.6k di sesi Asia Senin. SUI mengonfirmasi Double VAL Sweep, Limit Order aktif di $0.705 (Target +3.75R).",
-  lastUpdated: "14 September 2026, 12:35 WIB"
+  btcPrice: 86470,
+  btcChange24h: 3.82,
+  totalMarketCap: "$3.12T",
+  notes: "Rezim Makro: EXPANSION / INSTITUTIONAL INFLOW. Rekor ETF Inflow harian +$999 Juta USD. SOL mengonfirmasi Breakout Equal Highs $117.95, Jaring Limit aktif di $117.50 (Target +4.17R / R:R 1:4.17).",
+  lastUpdated: "23 September 2026, 11:51 WIB"
 };
 
 export const initialTrades: Trade[] = [
+  {
+    id: "TWS-005",
+    symbol: "SOL/USDT",
+    side: "LONG",
+    callDate: "23 Sep 2026",
+    entryPrice: 117.50,
+    currentPrice: 119.62,
+    stopLoss: 114.50,
+    tp1: 123.50,
+    tp2: 130.00,
+    status: "PENDING_LIMIT",
+    riskPct: 2.55,
+    realizedR: 0,
+    floatingR: 0,
+    totalR: 0,
+    amtSetupType: "Breakout Equal Highs $117.95 + Retest 1H Order Block + Fib 0.236",
+    autopsy: {
+      summary: "Jaring Limit Terpasang di $117.50 (Menunggu Pullback Retest)",
+      whatHappened: "SOL memecahkan resistensi Equal Highs $117.95 dengan Break of Structure impulsif ke $119.72. Jaring limit dipasang di atap 1H Order Block $117.50 untuk mengantisipasi retest sehat sebelum ekspansi ke $130.",
+      keyLesson: "SOP TWS: Dilarang FOMO mengejar candle hijau di pucuk lelang. Menunggu retest ke zona demand memberikan rasio Risk-to-Reward optimal 1:4.17.",
+      safeguardRule: "Jika terjemput, wajib amankan 50% di TP1 ($123.50) dan kunci Stop Loss ke Breakeven ($117.50)."
+    }
+  },
   {
     id: "TWS-004",
     symbol: "SUI/USDT",

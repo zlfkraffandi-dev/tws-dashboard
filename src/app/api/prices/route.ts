@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const ids = "bitcoin,near,bittensor,polkadot,uniswap,sui";
+    const ids = "bitcoin,near,bittensor,polkadot,uniswap,sui,solana";
     const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
 
     const controller = new AbortController();
@@ -24,7 +24,8 @@ export async function GET() {
       success: true,
       timestamp: new Date().toISOString(),
       prices: {
-        bitcoin: { price: data.bitcoin?.usd || 77600, change24h: data.bitcoin?.usd_24h_change || 0.1 },
+        bitcoin: { price: data.bitcoin?.usd || 86470, change24h: data.bitcoin?.usd_24h_change || 3.8 },
+        solana: { price: data.solana?.usd || 119.5, change24h: data.solana?.usd_24h_change || 6.2 },
         sui: { price: data.sui?.usd || 0.714, change24h: data.sui?.usd_24h_change || -0.6 },
         near: { price: data.near?.usd || 2.42, change24h: data.near?.usd_24h_change || 4.2 },
         bittensor: { price: data.bittensor?.usd || 236.8, change24h: data.bittensor?.usd_24h_change || -2.4 },
