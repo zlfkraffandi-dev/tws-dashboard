@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8919408645:AAHDwnOXsX6slCNr604AzPQvALxXjwpsX0M";
-const DEFAULT_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "1947418664";
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const DEFAULT_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
 
 async function sendTelegramMessage(chatId: string, text: string) {
   try {
