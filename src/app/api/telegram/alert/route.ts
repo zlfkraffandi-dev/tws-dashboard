@@ -2,16 +2,12 @@ import { NextResponse } from "next/server";
 import { sendTelegramMessage, fetchLatestChatId } from "@/lib/telegram";
 
 export async function GET() {
-  const chatId = await fetchLatestChatId();
-  if (!chatId) {
-    return NextResponse.json({
-      success: false,
-      message: "Belum ada chat_id terdeteksi. Silakan buka Telegram, cari @tradingjul_bot, lalu klik Start atau kirim pesan apapun ke bot tersebut.",
-      bot: "@tradingjul_bot"
-    });
-  }
+  const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "1947418664";
 
-  const testMsg = "🚀 <b>TWS TRADING SYSTEM CONNECTED!</b>\n\nHalo! Bot notifikasi resmi Anda <b>@tradingjul_bot</b> telah tersambung sempurna ke sistem analisis TWS.\n\n📡 <b>Setup Aktif</b>: SUI/USDT (Long)\n🎯 <b>Entry Limit</b>: $0.705\n🛡️ <b>Stop Loss</b>: $0.685\n🏁 <b>TP1 / TP2</b>: $0.742 / $0.780\n\n<i>Bot ini akan otomatis memberi tahu Anda saat order terjemput atau target tercapai!</i>";
+  const testMsg =
+    "🚀 <b>TWS TRADING SYSTEM ALERT WEBHOOK TEST</b>\n\n" +
+    "Webhook alert TradingView telah aktif dan tersambung sempurna ke Telegram bot Anda.\n\n" +
+    "<i>Setiap alert lelang dari TradingView akan langsung diteruskan ke chat ini secara instan!</i>";
   const sent = await sendTelegramMessage(testMsg, chatId);
 
   return NextResponse.json({
@@ -23,25 +19,54 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { type, symbol, price, details } = body;
-    const chatId = await fetchLatestChatId();
-
-    if (!chatId) {
-      return NextResponse.json({ success: false, error: "No chat_id" }, { status: 400 });
+    let body: any = {};
+    const textContent = await req.text();
+    
+    // Support JSON or raw text body from TradingView
+    try {
+      body = JSON.parse(textContent);
+    } catch {
+      body = { message: textContent };
     }
+
+    const { type, symbol, price, tp1, tp2, stopLoss, details, message } = body;
+    const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "1947418664";
 
     let msg = "";
     if (type === "ENTRY_FILLED") {
-      msg = "🔔 <b>[TWS ALERT - ORDER TERJEMPUT]</b>\n\nPair: <b>" + symbol + "</b>\nStatus: <b>Limit Order FILLED di $" + price + "</b>\nPosisi Long resmi AKTIF! 🚀\nPasang sabuk pengaman, pantau TP1 di $0.742.";
+      msg =
+        "🔔 <b>[TWS ALERT - ORDER LIMIT TERJEMPUT!]</b>\n\n" +
+        "• Pair: <b>" + (symbol || "CRYPTO") + "</b>\n" +
+        "• Harga Terjemput: <b>$" + (price || "") + "</b>\n" +
+        "• Status: <b>Limit Order RESMI TERISI!</b> 🚀\n\n" +
+        "Posisi Long sekarang AKTIF.\n" +
+        (tp1 ? "🎯 Target TP1: <b>$" + tp1 + "</b>\n" : "") +
+        (stopLoss ? "🛡️ Stop Loss: <b>$" + stopLoss + "</b> (-1.00R)\n" : "") +
+        "\n<i>Siapkan sabuk pengaman dan disiplin ikuti trading plan!</i>";
     } else if (type === "TP1_HIT") {
-      msg = "🎯 <b>[TWS ALERT - TP1 HIT!]</b>\n\nPair: <b>" + symbol + "</b>\nHarga: <b>$" + price + "</b>\n\n⚠️ <b>AKSI WAJIB</b>:\n1. Ambil 50% profit di bursa sekarang!\n2. <b>GESER STOP LOSS ke Breakeven ($0.705)</b> seketika.\n\nModal Anda kini 100% BEBAS RISIKO (Anti-Rugi)!";
-    } else if (type === "TP2_HIT") {
-      msg = "🏁 <b>[TWS ALERT - TP2 SMASHED / FULL WINNER!]</b>\n\nPair: <b>" + symbol + "</b>\nHarga: <b>$" + price + "</b>\n\n🎉 Tutup 100% sisa posisi. Trade selesai dengan kemenangan penuh (+3.75R)!";
+      msg =
+        "🎯 <b>[TWS ALERT - TP1 HIT!]</b>\n\n" +
+        "• Pair: <b>" + (symbol || "CRYPTO") + "</b>\n" +
+        "• Harga Saat Ini: <b>$" + (price || "") + "</b>\n\n" +
+        "⚠️ <b>AKSI WAJIB DISIPLIN SEKARANG</b>:\n" +
+        "1. Amankan 50% profit di bursa Anda!\n" +
+        "2. <b>GESER STOP LOSS ke Breakeven ($" + (price || "Entry") + ")</b> seketika.\n\n" +
+        "Modal Anda kini 100% BEBAS RISIKO (Anti-Rugi)!";
+    } else if (type === "TP2_HIT" || type === "TP_FINAL") {
+      msg =
+        "🏁 <b>[TWS ALERT - TP2 SMASHED / FULL WINNER!]</b>\n\n" +
+        "• Pair: <b>" + (symbol || "CRYPTO") + "</b>\n" +
+        "• Harga Saat Ini: <b>$" + (price || "") + "</b>\n\n" +
+        "🎉 <b>TUTUP 100% SISA POSISI!</b>\n" +
+        "Trade selesai dengan kemenangan penuh! Dilarang serakah membiarkan profit berbalik (*anti round-tripping*).";
     } else if (type === "STOP_LOSS") {
-      msg = "🛑 <b>[TWS ALERT - STOP LOSS DISIPLIN]</b>\n\nPair: <b>" + symbol + "</b>\nHarga: <b>$" + price + "</b>\nPosisi ditutup terukur (-1.00R). Modal terlindungi secara sistemik.";
+      msg =
+        "🛑 <b>[TWS ALERT - STOP LOSS TERUKUR]</b>\n\n" +
+        "• Pair: <b>" + (symbol || "CRYPTO") + "</b>\n" +
+        "• Harga: <b>$" + (price || "") + "</b>\n\n" +
+        "Posisi ditutup terukur di -1.00R. Modal terlindungi secara sistemik dari kejatuhan harga lebih dalam.";
     } else {
-      msg = "📢 <b>[TWS NOTIFICATION]</b>\n\n" + (details || "Update dari TWS Trading Engine");
+      msg = "📢 <b>[TWS TRADINGVIEW ALERT]</b>\n\n" + (message || details || textContent || "Alert dari TradingView");
     }
 
     const sent = await sendTelegramMessage(msg, chatId);
