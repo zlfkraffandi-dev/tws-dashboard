@@ -158,18 +158,25 @@ async function pollTelegramCommands() {
           await sendAlert(reply, chatId);
         } else if (rawText === 'info' || rawText === '/info') {
           const reply = 
-            '🌐 <b>[MARKET INTELLIGENCE & AMT RADAR]</b>\n' +
+            '🌐 <b>[TWS MARKET & MACRO INTELLIGENCE]</b>\n' +
             '━━━━━━━━━━━━━━━━━━━━\n' +
-            '• <b>BTC Status</b>: ~$76,400 (Rebound pasca-sweep low FOMC $75.0k)\n' +
-            '• <b>AMT Status</b>: Inside Value (Balance) | Orderflow: Net Selling\n' +
-            '• <b>BTC Dominance</b>: 59.32%\n' +
-            '• <b>Status Sinyal</b>: 🟡 <b>DEFENSIVE / SIMPAN KAS</b>\n' +
+            '📰 <b>1. SCOUTING BERITA & MAKRO</b>:\n' +
+            '• <b>Inflow ETF Rekor 2026</b>: Net inflow harian tembus <b>+$999 Juta USD</b> (BlackRock IBIT +$381M, Fidelity +$238M). Inilah pendorong reli $80k ➔ $87.3k.\n' +
+            '• <b>Kalender Ekonomi AS</b>: Pekan ini bersih dari data bom inflasi (Core PCE & GDP baru rilis 30 Sep). Situasi sangat kondusif.\n' +
+            '• <b>Status Regulasi</b>: RUU Cadangan Devisa Bitcoin AS lolos dengar pendapat DPR AS. Zero critical FUD.\n' +
             '━━━━━━━━━━━━━━━━━━━━\n' +
-            '🎯 <b>RADAR GAMEPLAN 2 ARAH (BILATERAL)</b>:\n' +
-            '• 🔴 <b>Area Pantau SHORT</b>: $78,080 – $79,500 (Bearish Order Block). Valid jika ada wick rejection / failed auction high.\n' +
-            '• 🟢 <b>Area Pantau LONG</b>: $74,800 – $75,200 (Demand Zone Retest). Valid jika ada absorpsi kuat di lantai diskon.\n' +
+            '📊 <b>2. STATUS LELANG AMT</b>:\n' +
+            '• <b>BTC Live</b>: ~$86,470 (Struktur 4H: Above VAH Expansion / Super Bullish)\n' +
+            '• <b>Order Block Baru 1H</b>: $85,535 – $86,334 (Lantai penahan koreksi institusi)\n' +
             '━━━━━━━━━━━━━━━━━━━━\n' +
-            '🛡️ <i>Disiplin Sully: Jangan trading di tengah lelang (POC). Tunggu harga menyentuh batas ekstrem!</i>';
+            '🎯 <b>3. SETUP JARING LIMIT (GRADE A+)</b>:\n' +
+            '• <b>Pair</b>: BTC/USDT (Long Limit)\n' +
+            '• <b>Entry Jaring</b>: <code>$85,800</code>\n' +
+            '• <b>Stop Loss</b>: <code>$84,800</code> (-1.16% / 1.00R)\n' +
+            '• <b>TP1 / TP2</b>: <code>$87,400</code> (+1.60R) / <code>$90,000</code> (+4.21R)\n' +
+            '• <b>Risk-to-Reward</b>: <b>1 : 4.21</b>\n' +
+            '━━━━━━━━━━━━━━━━━━━━\n' +
+            '🛡️ <i>Disiplin: Jangan FOMO market buy di $86.5k. Jemput di lantai Order Block $85,800!</i>';
           await sendAlert(reply, chatId);
         } else if (rawText === 'rekap' || rawText === '/rekap') {
           const reply = 
