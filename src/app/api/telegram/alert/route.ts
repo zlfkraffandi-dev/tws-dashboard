@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { sendTelegramMessage, fetchLatestChatId } from "@/lib/telegram";
 
 export async function GET() {
-  const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "1947418664";
+  const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "";
 
   const testMsg =
     "🚀 <b>TWS TRADING SYSTEM ALERT WEBHOOK TEST</b>\n\n" +
@@ -29,8 +29,7 @@ export async function POST(req: Request) {
       body = { message: textContent };
     }
 
-    const { type, symbol, price, tp1, tp2, stopLoss, details, message } = body;
-    const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "1947418664";
+    const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "";
 
     let msg = "";
     if (type === "ENTRY_FILLED") {
