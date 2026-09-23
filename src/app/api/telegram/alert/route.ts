@@ -29,6 +29,7 @@ export async function POST(req: Request) {
       body = { message: textContent };
     }
 
+    const { type, symbol, price, tp1, tp2, stopLoss, details, message } = body;
     const chatId = await fetchLatestChatId() || process.env.TELEGRAM_CHAT_ID || "";
 
     let msg = "";
