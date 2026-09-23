@@ -4,22 +4,24 @@ import { useEffect, useRef } from "react";
 import { useTradeStore } from "@/stores/useTradeStore";
 
 export default function PriceAutoStreamer() {
-  const { refreshPrices } = useTradeStore();
+  const { refreshPrices, fetchTrades } = useTradeStore();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // 1. Initial fetch on mount
+    // 1. Initial sync of trades from database and live prices
+    fetchTrades();
     refreshPrices();
 
-    // 2. Poll every 8 seconds
+    // 2. Poll prices & database state every 6 seconds
     timerRef.current = setInterval(() => {
       refreshPrices();
-    }, 8000);
+      fetchTrades();
+    }, 6000);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [refreshPrices]);
+  }, [refreshPrices, fetchTrades]);
 
   return null;
 }

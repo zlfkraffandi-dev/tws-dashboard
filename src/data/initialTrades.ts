@@ -16,21 +16,23 @@ export const initialTrades: Trade[] = [
     side: "LONG",
     callDate: "23 Sep 2026",
     entryPrice: 117.50,
-    currentPrice: 119.62,
+    currentPrice: 113.68,
     stopLoss: 114.50,
     tp1: 123.50,
     tp2: 130.00,
-    status: "PENDING_LIMIT",
+    highReached: 119.72,
+    lowReached: 113.55,
+    status: "STOP_LOSS",
     riskPct: 2.55,
-    realizedR: 0,
+    realizedR: -1.00,
     floatingR: 0,
-    totalR: 0,
+    totalR: -1.00,
     amtSetupType: "Breakout Equal Highs $117.95 + Retest 1H Order Block + Fib 0.236",
     autopsy: {
-      summary: "Jaring Limit Terpasang di $117.50 (Menunggu Pullback Retest)",
-      whatHappened: "SOL memecahkan resistensi Equal Highs $117.95 dengan Break of Structure impulsif ke $119.72. Jaring limit dipasang di atap 1H Order Block $117.50 untuk mengantisipasi retest sehat sebelum ekspansi ke $130.",
-      keyLesson: "SOP TWS: Dilarang FOMO mengejar candle hijau di pucuk lelang. Menunggu retest ke zona demand memberikan rasio Risk-to-Reward optimal 1:4.17.",
-      safeguardRule: "Jika terjemput, wajib amankan 50% di TP1 ($123.50) dan kunci Stop Loss ke Breakeven ($117.50)."
+      summary: "Hit Stop Loss di $114.50 (Proteksi Modal Disiplin saat Dump $113.55)",
+      whatHappened: "Harga SOL terkoreksi tajam menembus limit $117.50 dan menyentuh Stop Loss di $114.50, lalu terus anjlok ke $113.55. Sistem memotong kerugian tepat di -1.00R.",
+      keyLesson: "Disiplin SL -1R adalah polis asuransi mutlak: membatasi kerugian saat dump ke $113 menjaga portofolio tetap surplus bersih.",
+      safeguardRule: "Posisi ditutup disiplin di $114.50 (-1.00R). Akun kembali 100% kas bersih."
     }
   },
   {
