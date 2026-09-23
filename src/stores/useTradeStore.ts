@@ -99,6 +99,8 @@ export const useTradeStore = create<TradeStore>((set, get) => ({
         const currentTrades = get().trades;
         const updatedTrades = currentTrades.map((trade) => {
           let updatedPrice = trade.currentPrice;
+          if (trade.symbol.includes("SOL") && p.solana) updatedPrice = p.solana.price;
+          if (trade.symbol.includes("SUI") && p.sui) updatedPrice = p.sui.price;
           if (trade.symbol.includes("NEAR") && p.near) updatedPrice = p.near.price;
           if (trade.symbol.includes("TAO") && p.bittensor) updatedPrice = p.bittensor.price;
           if (trade.symbol.includes("DOT") && p.polkadot) updatedPrice = p.polkadot.price;
