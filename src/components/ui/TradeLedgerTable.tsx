@@ -37,6 +37,12 @@ export default function TradeLedgerTable() {
             <Clock className="h-3 w-3" /> Terjemput (Running)
           </span>
         );
+      case "PENDING_LIMIT":
+        return (
+          <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-semibold text-amber-400 border border-amber-500/30">
+            <Clock className="h-3 w-3" /> Antri Limit
+          </span>
+        );
       case "STOP_LOSS":
         return (
           <span className="inline-flex items-center gap-1 rounded-full bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-400 border border-rose-500/30">
