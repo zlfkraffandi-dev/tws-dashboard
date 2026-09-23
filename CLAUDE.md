@@ -32,7 +32,7 @@ Dokumen ini memuat seluruh memori, aturan, dan histori percakapan agar AI di per
 - **Web Dashboard**: Local `http://localhost:3000` (atau `3001` di Mac) / Cloud `https://tws-dashboard-zeta.vercel.app`
 
 ## 4. Perintah Wajib & SOP
-- `info`: Analisis makro & lelang BTC + 1 setup champion jaring limit (Grade A+). Jika pasar chop/pucuk/weekend: nyatakan `DEFENSIVE / SIMPAN KAS`.
+- `info`: **Wajib 3 Pilar**: (1) **Scouting Berita & Makro** (Inflow ETF, Kalender Ekonomi AS, Regulasi/FUD), (2) **Analisis Lelang AMT & Orderflow** (DEMA, Value Area, Order Blocks), (3) **1 Setup Champion Jaring Limit** (Grade A+, RR >= 1:2.5, lock BE di TP1, exit di TP2 3R-4R). Jika pasar chop/pucuk/weekend: nyatakan `DEFENSIVE / SIMPAN KAS`.
 - `update`: Status posisi running, PnL/R, dan jarak TP/BE. Jika tidak ada trade: laporkan 100% Kas Bersih.
 - `rekap`: Master journal & scoreboard (+3.17R, win rate 40%, autopsi trade).
 
