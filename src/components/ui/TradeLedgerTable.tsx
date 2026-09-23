@@ -87,8 +87,6 @@ export default function TradeLedgerTable() {
           </div>
         </div>
       </div>
-        </div>
-      </div>
 
       {/* Table Content */}
       <div className="overflow-x-auto">
