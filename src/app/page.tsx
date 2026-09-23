@@ -3,6 +3,7 @@ import Header from "@/components/ui/Header";
 import HeroScoreboard from "@/components/ui/HeroScoreboard";
 import ActivePositions from "@/components/ui/ActivePositions";
 import TradingViewWidget from "@/components/ui/TradingViewWidget";
+import MarketIntelligenceMTF from "@/components/ui/MarketIntelligenceMTF";
 import EquityCurveChart from "@/components/ui/EquityCurveChart";
 import TradeLedgerTable from "@/components/ui/TradeLedgerTable";
 import AutopsyModal from "@/components/ui/AutopsyModal";
@@ -33,6 +34,9 @@ export default function Home() {
 
           {/* Embedded Interactive TradingView Chart */}
           <TradingViewWidget />
+
+          {/* Deep Multi-Timeframe Analysis & Fibonacci Radar */}
+          <MarketIntelligenceMTF />
 
           {/* Equity Growth Curve */}
           <EquityCurveChart />
