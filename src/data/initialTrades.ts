@@ -159,11 +159,11 @@ export const initialTrades: Trade[] = [
 ];
 
 export const initialStats: PortfolioStats = {
-  totalTrades: 5,
-  winRatePct: 40.0,
-  netRMultiple: 3.17,
+  totalTrades: 6,
+  winRatePct: 33.3,
+  netRMultiple: 2.17,
   maxDrawdownR: 1.00,
   activeTradesCount: 0,
-  realizedRTotal: 3.17,
+  realizedRTotal: 2.17,
   floatingRTotal: 0
 };

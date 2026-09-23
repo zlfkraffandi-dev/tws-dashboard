@@ -82,6 +82,16 @@ export default function EquityCurveChart() {
       desc: "Hit Stop Loss di $0.685 (-1.00R)",
       pnlNote: "Stop Loss memproteksi modal saat likuidasi dump ke $0.671"
     },
+    {
+      id: "SOL",
+      label: "SOL",
+      sub: "23 Sep",
+      r: 2.17,
+      delta: -1.0,
+      status: "STOP_LOSS",
+      desc: "Hit Stop Loss di $114.50 (-1.00R)",
+      pnlNote: "Disiplin SL memotong kerugian saat SOL dump tembus $113"
+    },
   ];
 
   const minR = -1.8;
