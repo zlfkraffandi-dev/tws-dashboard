@@ -2,7 +2,7 @@ name: TWS 24/7 Cloud Sentinel
 
 on:
   schedule:
-    # Runs every 5 minutes in the cloud 24/7/365
+    # Runs in the cloud 24/7/365
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
@@ -13,5 +13,5 @@ jobs:
       - name: Trigger Cloud Sentinel Price & SL/TP Patrol
         run: |
           echo "Patrolling TWS market positions via Cloud Engine..."
-          curl -s -f "https://tws-dashboard-zeta.vercel.app/api/cron/check-price" || true
+          curl -s -f "https://tws-dashboard-zeta.vercel.app/api/cron/check-price?key=tws_sentinel_2026_secure" || true
           echo "Patrol complete."
