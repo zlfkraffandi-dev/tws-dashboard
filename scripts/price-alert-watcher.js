@@ -222,8 +222,6 @@ async function pollTelegramCommands() {
   } catch (err) {}
 }
 
-console.log('[TWS Multi-Engine Daemon] Started listening for SOL alerts and Telegram commands...');
+console.log('[TWS Local Watcher] Price monitoring running (Telegram commands handled 24/7 by Vercel Webhook)...');
 setInterval(checkPrice, 15000);
-setInterval(pollTelegramCommands, 3000);
 checkPrice();
-pollTelegramCommands();
