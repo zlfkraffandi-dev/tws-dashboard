@@ -9,7 +9,10 @@ import { motion } from "framer-motion";
 export default function TradeLedgerTable() {
   const { trades, filterStatus, setFilterStatus, searchQuery, setSearchQuery, setSelectedTrade } = useTradeStore();
 
-  const filteredTrades = trades.filter((t) => {
+  // Strictly isolate archived/completed trades so they NEVER mix with active/pending setups
+  const archivedTrades = trades.filter((t) => t.status === "CLOSED_WIN" || t.status === "STOP_LOSS");
+
+  const filteredTrades = archivedTrades.filter((t) => {
     const matchesFilter = filterStatus === "ALL" ? true : t.status === filterStatus;
     const matchesSearch =
       t.symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -23,24 +26,6 @@ export default function TradeLedgerTable() {
         return (
           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-400 border border-emerald-500/30">
             <CheckCircle2 className="h-3 w-3" /> Full Win
-          </span>
-        );
-      case "TP1_HIT":
-        return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/10 px-2.5 py-1 text-xs font-semibold text-cyan-400 border border-cyan-500/30">
-            <CheckCircle2 className="h-3 w-3" /> TP1 Hit (Free Trade)
-          </span>
-        );
-      case "ACTIVE":
-        return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/10 px-2.5 py-1 text-xs font-semibold text-blue-400 border border-blue-500/30">
-            <Clock className="h-3 w-3" /> Terjemput (Running)
-          </span>
-        );
-      case "PENDING_LIMIT":
-        return (
-          <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2.5 py-1 text-xs font-semibold text-amber-400 border border-amber-500/30">
-            <Clock className="h-3 w-3" /> Antri Limit
           </span>
         );
       case "STOP_LOSS":
@@ -59,11 +44,11 @@ export default function TradeLedgerTable() {
       {/* Header & Filter Controls */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-200">
-            Buku Besar & Log Autopsi Transparan (Master Trade Ledger)
+          <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+            🏛️ Arsip Buku Besar & Evaluasi Autopsi (Historical Trade Ledger)
           </h3>
-          <p className="text-xs text-slate-400">
-            Seluruh riwayat call trading tercatat jujur. Klik baris mana pun untuk membuka evaluasi autopsi.
+          <p className="text-xs text-slate-400 mt-0.5">
+            Khusus rekam jejak trade yang telah selesai ditutup 100%. Posisi aktif & antrian limit dikawal terpisah di Tactical Cockpit atas.
           </p>
         </div>
 
@@ -82,7 +67,7 @@ export default function TradeLedgerTable() {
 
           {/* Filter Pills */}
           <div className="flex items-center bg-slate-950/90 rounded-lg p-1 border border-slate-800 text-xs">
-            {(["ALL", "ACTIVE", "TP1_HIT", "CLOSED_WIN", "STOP_LOSS"] as const).map((st) => (
+            {(["ALL", "CLOSED_WIN", "STOP_LOSS"] as const).map((st) => (
               <button
                 key={st}
                 onClick={() => setFilterStatus(st)}
@@ -93,17 +78,15 @@ export default function TradeLedgerTable() {
                 }`}
               >
                 {st === "ALL"
-                  ? "Semua"
+                  ? "Semua Arsip"
                   : st === "CLOSED_WIN"
-                  ? "Win"
-                  : st === "STOP_LOSS"
-                  ? "Loss"
-                  : st === "TP1_HIT"
-                  ? "Free Trade"
-                  : "Aktif"}
+                  ? "Menang (Win)"
+                  : "Kalah Terukur (Loss)"}
               </button>
             ))}
           </div>
+        </div>
+      </div>
         </div>
       </div>
 
