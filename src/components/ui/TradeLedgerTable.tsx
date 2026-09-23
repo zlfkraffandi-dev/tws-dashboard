@@ -52,7 +52,20 @@ export default function TradeLedgerTable() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Color Indicator Legend */}
+          <div className="hidden sm:flex items-center gap-3 text-[11px] font-mono bg-slate-950/90 rounded-lg px-3 py-1.5 border border-slate-800">
+            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-500/50"></span>
+              Hijau: Goal / Full Win
+            </span>
+            <span className="text-slate-700">|</span>
+            <span className="flex items-center gap-1.5 text-rose-400 font-semibold">
+              <span className="h-2 w-2 rounded-full bg-rose-400 shadow-sm shadow-rose-500/50"></span>
+              Merah: Hit Stop Loss (-1R)
+            </span>
+          </div>
+
           {/* Search bar */}
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-500" />
@@ -105,58 +118,96 @@ export default function TradeLedgerTable() {
           </thead>
           <tbody className="divide-y divide-slate-800/60 font-sans">
             {filteredTrades.map((trade) => {
-              const isProfit = trade.totalR > 0;
-              const isLoss = trade.totalR < 0;
+              const isProfit = trade.status === "CLOSED_WIN" || trade.totalR > 0;
+              const isLoss = trade.status === "STOP_LOSS" || trade.totalR < 0;
 
               return (
                 <tr
                   key={trade.id}
                   onClick={() => setSelectedTrade(trade)}
-                  className="hover:bg-slate-800/40 transition-colors cursor-pointer group"
+                  className={`transition-all duration-200 cursor-pointer group ${
+                    isLoss
+                      ? "bg-rose-950/20 hover:bg-rose-900/35 border-l-4 border-l-rose-500"
+                      : "bg-emerald-950/20 hover:bg-emerald-900/35 border-l-4 border-l-emerald-500"
+                  }`}
                 >
-                  <td className="py-3 px-3">
+                  <td className="py-3.5 px-3">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-slate-200 group-hover:text-emerald-400 transition-colors">
+                      <span
+                        className={`font-mono font-bold transition-colors ${
+                          isLoss
+                            ? "text-rose-200 group-hover:text-rose-100"
+                            : "text-emerald-200 group-hover:text-emerald-100"
+                        }`}
+                      >
                         {trade.symbol}
                       </span>
-                      <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-mono text-slate-300">
+                      <span
+                        className={`rounded px-1.5 py-0.5 text-[10px] font-mono border ${
+                          isLoss
+                            ? "bg-rose-500/10 border-rose-500/30 text-rose-300"
+                            : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+                        }`}
+                      >
                         {trade.side}
                       </span>
                     </div>
-                    <div className="text-[11px] text-slate-400 truncate max-w-[180px]">
+                    <div className="text-[11px] text-slate-400 truncate max-w-[200px]">
                       {trade.amtSetupType}
                     </div>
                   </td>
-                  <td className="py-3 px-3 text-slate-400 font-mono text-[11px]">
+                  <td className="py-3.5 px-3 text-slate-400 font-mono text-[11px]">
                     {trade.callDate}
                   </td>
-                  <td className="py-3 px-3 font-mono text-slate-200">
+                  <td className="py-3.5 px-3 font-mono text-slate-200 font-semibold">
                     ${trade.entryPrice}
                   </td>
-                  <td className="py-3 px-3 font-mono">
-                    <span className={trade.status === "TP1_HIT" ? "text-emerald-400 font-semibold" : "text-rose-400"}>
+                  <td className="py-3.5 px-3 font-mono">
+                    <span
+                      className={`inline-block font-mono text-xs px-2 py-0.5 rounded font-semibold ${
+                        isLoss
+                          ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
+                          : "text-rose-400"
+                      }`}
+                    >
                       ${trade.stopLoss}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-mono text-slate-300">
-                    TP1: ${trade.tp1} <br />
-                    <span className="text-emerald-400 font-semibold">Final: ${trade.tp2}</span>
+                  <td className="py-3.5 px-3 font-mono text-slate-300">
+                    <div className="text-[11px] text-slate-400">TP1: ${trade.tp1}</div>
+                    <span
+                      className={`font-bold inline-block text-xs mt-0.5 ${
+                        isProfit
+                          ? "bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40"
+                          : "text-slate-400"
+                      }`}
+                    >
+                      Final: ${trade.tp2}
+                    </span>
                   </td>
-                  <td className="py-3 px-3">
+                  <td className="py-3.5 px-3">
                     {getStatusBadge(trade.status)}
                   </td>
-                  <td className="py-3 px-3 text-right font-mono font-bold text-sm">
+                  <td className="py-3.5 px-3 text-right font-mono">
                     <span
-                      className={
-                        isProfit ? "text-emerald-400" : isLoss ? "text-rose-400" : "text-slate-400"
-                      }
+                      className={`inline-flex items-center px-2.5 py-1 rounded-lg font-bold font-mono text-xs border ${
+                        isProfit
+                          ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm shadow-emerald-950/50"
+                          : "bg-rose-500/20 text-rose-300 border-rose-500/40 shadow-sm shadow-rose-950/50"
+                      }`}
                     >
                       {isProfit ? `+${trade.totalR.toFixed(2)}R` : `${trade.totalR.toFixed(2)}R`}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-center">
-                    <button className="rounded-lg bg-slate-800/80 group-hover:bg-emerald-600 group-hover:text-slate-950 px-2 py-1 text-[11px] font-medium text-slate-300 transition-colors">
-                      Buka &rarr;
+                  <td className="py-3.5 px-3 text-center">
+                    <button
+                      className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all border ${
+                        isLoss
+                          ? "bg-rose-950/80 border-rose-500/40 text-rose-300 group-hover:bg-rose-600 group-hover:text-white"
+                          : "bg-emerald-950/80 border-emerald-500/40 text-emerald-300 group-hover:bg-emerald-600 group-hover:text-slate-950"
+                      }`}
+                    >
+                      {isLoss ? "Autopsi →" : "Detail →"}
                     </button>
                   </td>
                 </tr>
