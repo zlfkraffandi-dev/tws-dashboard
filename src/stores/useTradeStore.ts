@@ -17,6 +17,7 @@ interface TradeStore {
   setSearchQuery: (query: string) => void;
   setSelectedTrade: (trade: Trade | null) => void;
   exportToCsv: () => void;
+  fetchTrades: () => Promise<void>;
   refreshPrices: () => Promise<void>;
 }
 
@@ -33,6 +34,20 @@ export const useTradeStore = create<TradeStore>((set, get) => ({
   setFilterStatus: (status) => set({ filterStatus: status }),
   setSearchQuery: (query) => set({ searchQuery: query }),
   setSelectedTrade: (trade) => set({ selectedTrade: trade }),
+
+  fetchTrades: async () => {
+    try {
+      const res = await fetch("/api/trades");
+      const json = await res.json();
+      if (json.success && json.data) {
+        set({
+          trades: json.data.trades,
+          macro: json.data.macro,
+          stats: json.data.stats,
+        });
+      }
+    } catch {}
+  },
 
   exportToCsv: () => {
     const { trades } = get();
@@ -97,6 +112,7 @@ export const useTradeStore = create<TradeStore>((set, get) => ({
       if (json.success && json.prices) {
         const p = json.prices;
         const currentTrades = get().trades;
+        
         const updatedTrades = currentTrades.map((trade) => {
           let updatedPrice = trade.currentPrice;
           if (trade.symbol.includes("SOL") && p.solana) updatedPrice = p.solana.price;
@@ -106,30 +122,55 @@ export const useTradeStore = create<TradeStore>((set, get) => ({
           if (trade.symbol.includes("DOT") && p.polkadot) updatedPrice = p.polkadot.price;
           if (trade.symbol.includes("UNI") && p.uniswap) updatedPrice = p.uniswap.price;
 
+          let status = trade.status;
+          let realizedR = trade.realizedR;
           let floatingR = trade.floatingR;
           let totalR = trade.totalR;
-          if (trade.status === "ACTIVE") {
-            const rDistance = Math.abs(trade.entryPrice - trade.stopLoss);
-            floatingR = parseFloat(((updatedPrice - trade.entryPrice) / rDistance).toFixed(2));
-            totalR = floatingR;
-          } else if (trade.status === "TP1_HIT") {
-            const rDistance = Math.abs(trade.entryPrice - 2.146);
-            const sisaR = (updatedPrice - trade.entryPrice) / rDistance;
-            floatingR = parseFloat((sisaR * 0.5).toFixed(2));
-            totalR = parseFloat((trade.realizedR + floatingR).toFixed(2));
+
+          // Automated SL / TP State Machine
+          if (trade.status === "PENDING_LIMIT" || trade.status === "ACTIVE" || trade.status === "TP1_HIT") {
+            if (trade.side === "LONG" && updatedPrice <= trade.stopLoss) {
+              // Trigger Stop Loss automatically
+              status = "STOP_LOSS";
+              realizedR = -1.00;
+              floatingR = 0;
+              totalR = -1.00;
+            } else if (trade.side === "LONG" && updatedPrice >= trade.tp2) {
+              // Trigger Full TP2
+              status = "CLOSED_WIN";
+              const rDistance = Math.abs(trade.entryPrice - trade.stopLoss);
+              realizedR = rDistance > 0 ? parseFloat(((trade.tp2 - trade.entryPrice) / rDistance).toFixed(2)) : 3.0;
+              floatingR = 0;
+              totalR = realizedR;
+            } else if (trade.status === "ACTIVE") {
+              const rDistance = Math.abs(trade.entryPrice - trade.stopLoss);
+              floatingR = parseFloat(((updatedPrice - trade.entryPrice) / rDistance).toFixed(2));
+              totalR = floatingR;
+            } else if (trade.status === "TP1_HIT") {
+              const rDistance = Math.abs(trade.entryPrice - trade.stopLoss);
+              const sisaR = (updatedPrice - trade.entryPrice) / rDistance;
+              floatingR = parseFloat((sisaR * 0.5).toFixed(2));
+              totalR = parseFloat((trade.realizedR + floatingR).toFixed(2));
+            }
           }
 
           return {
             ...trade,
+            status,
             currentPrice: updatedPrice,
+            realizedR,
             floatingR,
             totalR,
           };
         });
 
-        const realizedR = updatedTrades.reduce((acc, t) => acc + (t.status === "STOP_LOSS" ? -1 : t.realizedR), 0);
-        const floatingRTotal = updatedTrades.reduce((acc, t) => acc + t.floatingR, 0);
+        const closedTrades = updatedTrades.filter(t => t.status === "CLOSED_WIN" || t.status === "STOP_LOSS");
+        const activeTrades = updatedTrades.filter(t => t.status === "ACTIVE" || t.status === "TP1_HIT" || t.status === "PENDING_LIMIT");
+        const realizedR = closedTrades.reduce((acc, t) => acc + (t.status === "STOP_LOSS" ? -1 : t.realizedR), 0);
+        const floatingRTotal = activeTrades.reduce((acc, t) => acc + t.floatingR, 0);
         const netR = parseFloat((realizedR + floatingRTotal).toFixed(2));
+        const winCount = closedTrades.filter(t => t.status === "CLOSED_WIN" || t.realizedR > 0).length;
+        const winRate = closedTrades.length > 0 ? parseFloat(((winCount / closedTrades.length) * 100).toFixed(1)) : 50.0;
 
         set({
           trades: updatedTrades,
@@ -142,6 +183,8 @@ export const useTradeStore = create<TradeStore>((set, get) => ({
           stats: {
             ...get().stats,
             netRMultiple: netR,
+            winRatePct: winRate,
+            activeTradesCount: activeTrades.length,
             floatingRTotal: parseFloat(floatingRTotal.toFixed(2)),
             realizedRTotal: parseFloat(realizedR.toFixed(2))
           },
