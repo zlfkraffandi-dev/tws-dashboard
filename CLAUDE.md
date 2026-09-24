@@ -15,9 +15,9 @@ Dokumen ini memuat seluruh memori, aturan, dan histori percakapan agar AI di per
   - Tidak pernah trading di tengah lelang (POC / Chop zone).
 
 ## 2. Master Scoreboard Resmi
-- **Total Trade**: 5 Trade Resmi (2 Menang Penuh, 3 Cut SL Disiplin)
-- **Win Rate**: 40.0% Realized
-- **Net Realized Profit**: **+3.17R Net** 🚀
+- **Total Trade**: 6 Trade Resmi (2 Menang Penuh, 4 Cut SL Disiplin)
+- **Win Rate**: 33.3% Realized
+- **Net Realized Profit**: **+2.17R Net Surplus** 🚀
 - **Resiko Terbuka Saat Ini**: 0.00% (100% Kas Bersih / Standby)
 - **Histori**:
   1. DOT/USDT: TP1 & TP2 Hit (+3.71R Net)
@@ -25,6 +25,7 @@ Dokumen ini memuat seluruh memori, aturan, dan histori percakapan agar AI di per
   3. TAO/USDT: SL Terukur di $237.50 (-1.00R - Menyelamatkan modal dari dump $230)
   4. UNI/USDT: SL Lesson (-1.00R - Melahirkan SOP kunci BE di TP1)
   5. SUI/USDT: SL Terukur di $0.685 (-1.00R - Terkena likuiditas pajak AS 15 Sep)
+  6. SOL/USDT: SL Terukur di $114.50 (-1.00R - 23 Sep: Double VAH sweep & dump BTC dari $87.4k ke $84.0k)
 
 ## 3. Integrasi Sistem
 - **Telegram Bot**: `@tradingjul_bot`

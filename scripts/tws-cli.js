@@ -19,12 +19,18 @@ const cmd = (process.argv[2] || 'info').toLowerCase();
 
 async function getBtcPrice() {
   try {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT', { signal: AbortSignal.timeout(1500) });
     const data = await res.json();
-    return parseFloat(data.price);
-  } catch (e) {
-    return 85750;
-  }
+    if (data && data.price) return parseFloat(data.price);
+  } catch (e) {}
+
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd', { signal: AbortSignal.timeout(3000) });
+    const data = await res.json();
+    if (data?.bitcoin?.usd) return parseFloat(data.bitcoin.usd);
+  } catch (e) {}
+
+  return 83800;
 }
 
 async function main() {
@@ -34,18 +40,18 @@ async function main() {
     console.log('========================================');
     console.log('• Status Posisi     : 🛡️  100% KAS BERSIH (Zero Exposure)');
     console.log('• Resiko Floating   : 0.00% (Nol resiko di pasar)');
-    console.log('• Akumulasi Realized: +3.17R Net Profit 🚀');
+    console.log('• Akumulasi Realized: +2.17R Net Profit 🚀');
     console.log('• Sikap Pasar       : DEFENSIVE / SIMPAN KAS');
     console.log('----------------------------------------');
-    console.log('💡 Market sedang koreksi pasca-pucuk ($85k). Kas aman utuh di dompet.\n');
+    console.log('💡 Market sedang koreksi pasca-pucuk. Kas aman utuh di dompet.\n');
   } else if (cmd === 'rekap') {
     console.log('\n📓 ========================================');
     console.log('   [TWS MASTER SCOREBOARD & JURNAL]');
     console.log('========================================');
     console.log('🏆 TOTAL PERFORMA RESMI:');
-    console.log('• Total Trade       : 5 Selesai (2 Win, 3 Loss)');
-    console.log('• Direction Win Rate: 40.0% Realized');
-    console.log('• Total Net Profit  : +3.17R Net Realized 🚀');
+    console.log('• Total Trade       : 6 Selesai (2 Win, 4 Loss)');
+    console.log('• Direction Win Rate: 33.3% Realized');
+    console.log('• Total Net Profit  : +2.17R Net Realized 🚀');
     console.log('• Resiko Terbuka    : 0% (Kas 100% Bersih)');
     console.log('----------------------------------------');
     console.log('📋 HISTORI LENGKAP:');
@@ -54,8 +60,9 @@ async function main() {
     console.log('3. 🔴 TAO/USDT : SL Terukur (-1.00R - Menyelamatkan dari dump $230)');
     console.log('4. 🔴 UNI/USDT : SL Lesson (-1.00R)');
     console.log('5. 🔴 SUI/USDT : SL Terukur (-1.00R - Liquidity drain 15 Sep)');
+    console.log('6. 🔴 SOL/USDT : SL Terukur (-1.00R - Double VAH sweep & BTC dump 23 Sep)');
     console.log('----------------------------------------');
-    console.log('✨ Formula Sully: E = (40% x 3.08R) - (60% x 1.00R) = +0.63R per trade!\n');
+    console.log('✨ Formula Sully: E = (33.3% x 3.08R) - (66.7% x 1.00R) = +0.36R per trade!\n');
   } else {
     // Default to 'info'
     const btc = await getBtcPrice();
