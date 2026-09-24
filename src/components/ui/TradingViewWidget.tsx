@@ -11,11 +11,11 @@ declare global {
 }
 
 const symbols = [
-  { label: "SOL/USDT (Trade #005 - Active)", symbol: "BYBIT:SOLUSDT.P", badge: "Antri Limit $117.50" },
-  { label: "BTC/USDT (Makro)", symbol: "BYBIT:BTCUSDT.P", badge: "Risk-On +$999M Inflow" },
-  { label: "ETH/USDT", symbol: "BYBIT:ETHUSDT.P", badge: "Breakout Equal Highs" },
-  { label: "NEAR/USDT (Trade #001)", symbol: "BYBIT:NEARUSDT.P", badge: "Full Win (+2.46R)" },
-  { label: "DOT/USDT (Trade #002)", symbol: "BYBIT:DOTUSDT.P", badge: "Full Win (+3.71R)" },
+  { label: "UNI/USDT (Champion Candidate)", symbol: "BYBIT:UNIUSDT.P", badge: "Diskon -10.8% S/R Flip" },
+  { label: "NEAR/USDT (Momentum Leader)", symbol: "BYBIT:NEARUSDT.P", badge: "Vol $2.33B Retest $4.00" },
+  { label: "SOL/USDT (Trade #005 - Closed SL)", symbol: "BYBIT:SOLUSDT.P", badge: "Evaluasi VAH Sweep" },
+  { label: "BTC/USDT (Makro)", symbol: "BYBIT:BTCUSDT.P", badge: "Jangkar Makro $84k" },
+  { label: "ETH/USDT", symbol: "BYBIT:ETHUSDT.P", badge: "Konsolidasi $2,679" },
 ];
 
 export default function TradingViewWidget() {
