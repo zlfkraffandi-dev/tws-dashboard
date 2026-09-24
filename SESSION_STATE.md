@@ -5,28 +5,35 @@ File ini otomatis diperbarui oleh AI di PC maupun Mac setiap kali ada interaksi 
 ---
 
 ## 📌 Status Terakhir (Last Updated)
-* **Waktu Terakhir**: Kamis, 24 September 2026, Pukul 09:30 WIB
+* **Waktu Terakhir**: Kamis, 24 September 2026, Pukul 09:32 WIB
 * **Perangkat Terakhir Aktif**: Mac
 * **Status Portofolio**: 🛡️ **100% KAS BERSIH (Zero Exposure / Standby)**
 * **Akumulasi Realized**: **+2.17R Net Profit** (Win Rate: 33.3% Realized | 6 Trade Selesai)
 * **Open Risk**: **0.00%**
-* **Preferensi User**: Fokus Altcoin likuid (SOL / SUI), menghindari BTC & ETH untuk eksekusi.
+* **Preferensi User**: Hindari BTC & ETH, jangan memanaskan kembali SOL. Fokus pada koin-koin segar hasil live scouting CoinGecko.
 
 ---
 
-## 🌐 Kondisi Pasar Terkini (Kamis, 24 Sep 2026)
-* **BTC Live**: `~$84,127` | Koreksi pasca-pucuk $87.4k. Menjadi jangkar makro (The King's Veto).
-* **ETH Live**: `~$2,679` | Koreksi menguji area $2,650 demand.
-* **SOL Live**: `~$114.84` | Koreksi pasca Double VAH sweep $119.50. Mengarah ke Golden Pocket $111.00.
-* **SUI Live**: `~$0.958` | Pullback -6.2%, menguji level psikologis $0.92–$0.95.
+## 🌐 Live Scouting Pasar CoinGecko (Top Altcoins by Volume & Volatility)
+* **NEAR**: `$4.36` | Vol $2.33B | 7D: +61.1% | Retest support pasca peak $4.79.
+* **UNI**: `$9.39` | Vol $1.62B | 24H: -10.8% dump mencari lantai | Retest breakout level $9.00.
+* **HYPE**: `$92.44` | Vol $1.11B | 7D: +18.2% | Trending rank #11.
+* **SUI**: `$0.958` | Vol $1.01B | 24H: -5.9% | Koreksi pasca ATH lokal $1.079.
+* **XRP**: `$1.50` | Vol $6.16B | 24H: -5.7%.
 
 ---
 
-## 🎯 SETUP CHAMPION ALTCOIN (USULAN GRADE A+): SOL/USDT
-* **Instrumen**: `BYBIT:SOLUSDT.P` (Perpetual Long)
-* **Status**: 💡 **DISUSUN BERDASARKAN SOP EVALUASI LAPANGAN 23 SEP**
-* **Titik Antri (Entry)**: **$111.20** (Confluence 4H Bullish OB + Fib 0.618–0.705 Golden Pocket + Range Low VAL)
-* **Stop Loss**: **$107.80** (-3.05% / 1.00R - di bawah wick swing low 4H)
-* **Target 1 (TP1)**: **$117.50** (+5.66% / +1.85R) ➔ Kunci Breakeven (BEP)
-* **Target 2 (TP2)**: **$124.50** (+11.96% / +3.91R) ➔ Target Utama Likuiditas Atap
-* **Risk-to-Reward**: **1 : 3.91 (GRADE A+)**
+## 🎯 SETUP CHAMPION FRESH (USULAN GRADE A+)
+1. **UNI/USDT (Long Limit - Deep Discount Retest)**:
+   * **Entry**: **$8.90** (High Volume Consolidation Shelf + Fib 0.50 Equilibrium)
+   * **Stop Loss**: **$8.38** (-5.84% / 1.00R)
+   * **TP1**: **$9.90** (+1.92R) ➔ Kunci Breakeven
+   * **TP2**: **$10.80** (+3.65R) ➔ Target Pucuk VAH
+   * **R:R**: **1 : 3.65 (GRADE A+)**
+
+2. **NEAR/USDT (Long Limit - Momentum Leader Golden Pocket)**:
+   * **Entry**: **$4.02** (Magnet psikologis $4.00 + Fib 0.618)
+   * **Stop Loss**: **$3.78** (-5.97% / 1.00R)
+   * **TP1**: **$4.48** (+1.92R) ➔ Kunci Breakeven
+   * **TP2**: **$4.85** (+3.46R) ➔ Breakout Extension
+   * **R:R**: **1 : 3.46 (GRADE A+)**
