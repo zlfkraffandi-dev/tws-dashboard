@@ -115,8 +115,8 @@ export default function TradingViewWidget() {
           <div className="relative w-full rounded-xl overflow-hidden border border-slate-800/90 bg-slate-950 group">
             <div className="relative aspect-[16/9] w-full max-h-[560px]">
               <Image
-                src="/sol_live_chart.png"
-                alt="TradingView Live Sync Chart with Drawings"
+                src="/uni_chart_tradingview.png"
+                alt="TradingView Live Sync Chart with Drawings - UNIUSDT"
                 fill
                 className="object-contain"
                 priority
@@ -127,7 +127,7 @@ export default function TradingViewWidget() {
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
               <div className="flex items-center gap-2 rounded-lg bg-slate-950/80 backdrop-blur-md px-3 py-1.5 border border-slate-800/80 text-xs font-mono text-slate-200 pointer-events-auto">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Akun: <b>zulfikaraffandi7</b> (Layout: bpnbT4ic)</span>
+                <span>Akun: <b>zulfikaraffandi7</b> (Red List Synced: UNIUSDT.P)</span>
               </div>
 
               <a
@@ -146,15 +146,15 @@ export default function TradingViewWidget() {
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-1 text-cyan-300">
                   <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400" />
-                  Fibonacci Retracement ($111.00 &rarr; $119.72)
+                  Demand Shelf S/R Flip ($8.90 &ndash; $9.15)
                 </span>
                 <span className="flex items-center gap-1 text-emerald-300">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                  Long Box (Entry $117.50 | SL $114.50 | TP $130)
+                  Long Box (Entry $8.90 | SL $8.38 [-1.00R] | TP1 $9.90 | TP2 $10.80 [+3.65R])
                 </span>
               </div>
               <span className="text-amber-400 font-semibold">
-                3 Alert Webhook Aktif (Entry, TP1, SL)
+                Red List Watchlist Aktif
               </span>
             </div>
           </div>
